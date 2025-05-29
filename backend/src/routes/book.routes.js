@@ -58,4 +58,33 @@ bookRouter.get("/",protectRoute,async(req,res)=>{
     }
 })
 
+bookRouter.delete("/:id",protectRoute,async(req,res)=>{
+    try {
+        const book=await Book.findById(req.params.id);
+        if(!book){
+            return res.status(404).json({message:"Book not found"});
+        }
+
+        if(book.user.toString()!==req.user._id){
+            return res.status(401).json({message:"unauthorized"});
+        }
+
+        if(book.image && book.image.includes("cloudinary")){
+            try {
+                const publicId=book.image.split("/").pop().split(".")[0];
+                await cloudinary.uploader.destroy(publicId);
+            } catch (error) {
+                console.log("Error deleting image from cloudinary",error);
+            }
+        }
+
+        await book.deleteOne();
+        res.status(200).json({message:"Book deleted successfully"});
+
+    } catch (error) {
+        console.log("error in deleting book route",error);
+        res.status(400).json({message:"Internal server error"});
+    }
+})
+
 export default bookRouter;
