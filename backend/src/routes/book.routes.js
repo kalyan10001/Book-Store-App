@@ -87,4 +87,14 @@ bookRouter.delete("/:id",protectRoute,async(req,res)=>{
     }
 })
 
+bookRouter.get("/user",protectRoute,async(req,res)=>{
+    try {
+        const books=await Book.find({user:req.user._id}).sort({createdAt:-1});
+        res.json(books);
+    } catch (error) {
+        console.log("error in Get User Books route",error);
+        res.status(500).json({message:"Internal server error"});
+    }
+})
+
 export default bookRouter;
