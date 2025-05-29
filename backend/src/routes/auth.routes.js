@@ -51,7 +51,7 @@ authRouter.post("/register",async(req,res)=>{
         res.status(201).json({
             token,
             user:{
-                _id:user._id,
+                id:user._id,
                 username:user.username,
                 profileImage:user.profileImage
             },
