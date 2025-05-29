@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import {Image} from "expo-image";
+import { Link } from "expo-router";
 
 export default function Index() {
   return (
@@ -7,7 +7,8 @@ export default function Index() {
       style={styles.container}
     >
       <Text style={styles.text}> this </Text>
-      <Image source={require('../assets/images/favicon.png')} style={styles.image}/>
+      <Link href="/(auth)/signup">signup</Link>
+      <Link href="/(auth)">login</Link>
     </View>
   );
 }
