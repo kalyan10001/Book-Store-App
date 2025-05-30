@@ -10,7 +10,7 @@ export const useAuthStore=create((set)=>({
 
         set({isLoading:true});
         try {
-            const res=await fetch("http://192.168.1.4:3000/api/auth/register",{
+            const res=await fetch("https://book-store-app-z5p7.onrender.com/api/auth/register",{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json",
