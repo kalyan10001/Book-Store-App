@@ -47,7 +47,7 @@ authRouter.post("/register",async(req,res)=>{
 
         await user.save();
 
-        const token=generateToken(user._id);
+        const token=await generateToken(user._id);
         res.status(201).json({
             token,
             user:{
