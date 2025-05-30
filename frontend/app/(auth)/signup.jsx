@@ -1,20 +1,28 @@
-import { View, Text, KeyboardAvoidingView, Platform, Image, TextInput, TouchableOpacity } from 'react-native'
+import { View, Text, KeyboardAvoidingView, Platform, Image, TextInput, TouchableOpacity, Alert, ActivityIndicator } from 'react-native'
 import styles from '../../assets/styles/signup.styles.js'
 import { Ionicons } from '@expo/vector-icons'
 import COLORS from '../../constants/colors.js'
 import { useState } from 'react';
 import { useRouter } from 'expo-router';
+import { useAuthStore } from '../../store/auth.store.js';
 export default function Signup() {
 
   const [username,setUsername]=useState("");
   const [email,setEmail]=useState("");
     const [password,setPassword]=useState("");
     const [showPassword,setShowPassword]=useState(false);
-    const [isLoading,setIsLoading]=useState(false);
+
+    const {user,isLoading,register,token}=useAuthStore();
 
     const router=useRouter();
 
-    const handleSignup=async()=>{}
+    console.log("user",user);
+    console.log("token",token);
+    const handleSignup=async()=>{
+      const result=await register(username,email,password);
+
+      if(!result.success)Alert.alert("error",result.error);
+    }
 
   return (
         <KeyboardAvoidingView 
@@ -105,7 +113,7 @@ export default function Signup() {
             {isLoading ? (
               <ActivityIndicator color="#fff"/>
             ) : (
-              <Text style={styles.buttonText}>Login</Text>
+              <Text style={styles.buttonText}>Signup</Text>
             )}
           </TouchableOpacity>
           <View style={styles.footer}>
