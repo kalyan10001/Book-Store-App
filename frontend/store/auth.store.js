@@ -1,5 +1,6 @@
 import {create} from "zustand";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {API_URL} from "../constants/api.js"
 
 export const useAuthStore=create((set)=>({
     user:null,
@@ -10,7 +11,7 @@ export const useAuthStore=create((set)=>({
 
         set({isLoading:true});
         try {
-            const res=await fetch("https://book-store-app-z5p7.onrender.com/api/auth/register",{
+            const res=await fetch(`${API_URL}/api/auth/register`,{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json",
@@ -62,7 +63,7 @@ export const useAuthStore=create((set)=>({
         set({isLoading:true});
 
         try{
-        const res=await fetch("https://book-store-app-z5p7.onrender.com/api/auth/login",{
+        const res=await fetch(`${API_URL}/api/auth/login`,{
                 method:"POST",
                 headers:{
                     "Content-Type":"application/json",
@@ -74,6 +75,7 @@ export const useAuthStore=create((set)=>({
             })
 
             const data=await res.json();
+            console.log("data",data);
 
             if(!res.ok)throw new Error(data.message || "something went wrong");
 
