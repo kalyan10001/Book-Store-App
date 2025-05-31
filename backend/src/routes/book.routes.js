@@ -44,7 +44,7 @@ bookRouter.get("/",protectRoute,async(req,res)=>{
         .limit(limit)
         .populate("user","username profileImage");
 
-        const totalBooks=Book.countDocuments();
+        const totalBooks=await Book.countDocuments();
 
         res.send({
             books,
