@@ -5,7 +5,6 @@ import { useAuthStore } from '../../store/auth.store.js'
 
 export default function Profile() {
 
-  // const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2ODNhOTQwZTBjMGE3OGUzNDU4ZmFkYzciLCJpYXQiOjE3NDg2Njk5NTAsImV4cCI6MTc0OTk2NTk1MH0.MQtdqBdjzlG-wiQau-ve12LO16dyV_xWFpXjAsFJ_QU";
 
   useEffect(() => {
     const {token}=useAuthStore();
