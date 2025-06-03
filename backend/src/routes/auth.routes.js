@@ -53,7 +53,9 @@ authRouter.post("/register",async(req,res)=>{
             user:{
                 id:user._id,
                 username:user.username,
-                profileImage:user.profileImage
+                profileImage:user.profileImage,
+                email:user.email,
+                createdAt:user.createdAt
             },
         });
     } catch (error) {
